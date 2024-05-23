@@ -22,9 +22,22 @@ fclean: clean
 	@rm -rf $(NAME)
 re: fclean all
 
-test: 
-	@cat Makefile >test.txt
-	@./Replace test.txt @ Q
+tests: all test1 test2 test3
+
+test1: all
+	@echo "\e[1;35m testing with Makefile: replace @ with Q \e[0m"
+	@cat Makefile >test1.txt
+	@./$(NAME) test1.txt @ Q
+
+test2: all
+	@echo "\e[1;35m testing with Makefile: replace @ with | \e[0m"
+	@cat Makefile >test2.txt
+	@./$(NAME) test2.txt @ "|"
+
+test3: all
+	@echo "\e[1;35m testing with Makefile: replace @ with BOOGER \e[0m"
+	@cat Makefile >test3.txt
+	@./$(NAME) test3.txt @ BOOGER
 
 .PHONY: clean fclean re
 
